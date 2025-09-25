@@ -1,0 +1,67 @@
+<app-header></app-header>
+<section class="content-main">
+    <div class ="content-header">
+        <h2 class = "content-title">Catalogo <mat-icon>menu_book</mat-icon></h2>
+
+        <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+          <p style="font-size: 20px; margin: 0;">
+            <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+            <b>{{ message }}</b>
+            <button class="close-button" (click)="closePopup()">×</button>
+          </p>
+        </div>
+ 
+        <div>
+            <a href="/addProduct" class="btn btn-primary" *ngIf="auth.isLoggedAdmin()">Aggiungi Prodotto</a>
+            <a href="/category" class="btn btn-primary" *ngIf="auth.isLoggedAdmin()">Categorie</a>
+        </div>
+    </div>
+    <div class="card mb-4">
+        <header class="card-header">
+        <div class="row gx-3">
+          <div class="col-lg-4 col-md-6 me-auto">
+            <input id="search" type="text" [(ngModel)] = "search" placeholder="Cerca..." class="form-control" (input)="searchingSpecificProduct()" [disabled]="isDisabled">
+          </div>
+          <div class="col-lg-2 col-6 col-md-3">
+            <select class="form-select" [(ngModel)]="optionCategory" [disabled]="!category$" (change)="searchingByCategory()">
+              <option>Tutte le categorie</option>
+              <option *ngFor="let category of category$">{{category.name}}</option>
+            </select>
+          </div>
+        </div>
+      </header>
+  
+      <div class="card-body" *ngIf="auth.isLoggedAdmin()">
+        <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5" *ngIf="products$">
+            <app-products-card *ngFor="let product of products$" [product] = "product" (activate) = "activateProduct(product.code)" (edit) = "editProduct(product.code)" (show) = "showProduct(product.code)"></app-products-card>
+        </div>
+      </div>
+
+      <div class="card-body" *ngIf="!auth.isLoggedAdmin()">
+        <div class="row gx-3 row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 row-cols-xxl-5" *ngIf="products$">
+          <ng-container *ngFor="let product of products$">
+            <app-products-card [product] = "product" (cart) = "addCart(product.code)" (remove) = "removeFromCart(product.code)" (show) = "showProduct(product.code)"></app-products-card>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div *ngIf="((!products$ || products$.length === 0) && dataLoaded)">
+    <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+      <p style="font-size: 20px; margin: 0;">
+        <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+        <b>{{ message }}</b>
+        <button class="close-button" (click)="closePopup()">×</button>
+      </p>
+    </div>
+  </div>
+
+  <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+    <p style="font-size: 20px; margin: 0;">
+      <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+      <b>{{ message }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+  </div>
+<app-footer></app-footer>

@@ -1,0 +1,135 @@
+.popup {
+  position: fixed;
+  top: 320px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  width: fit-content;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup p {
+  font-size: 20px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.popup mat-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  color: #f44336; /* warn color */
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: #888;
+  align-self: flex-start;
+}
+
+.close-button:hover {
+  color: #555;
+}
+
+/* Stile per le tabelle */
+table {
+  border-collapse: collapse;
+  width: 700px;
+}
+
+/* Stile per le celle della tabella */
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Stile per l'intestazione della tabella */
+th {
+  background-color: #0062cc;
+  color: white;
+}
+
+/* Stile per le tabelle in generale */
+table {
+  margin-top: 20px;
+}
+
+/* Stile per gli input all'interno delle tabelle */
+table input[type="text"] {
+  width: calc(100% - 16px); /* Ridimensiona la larghezza dell'input */
+  padding: 8px;
+}
+
+/* Stile per i bottoni all'interno delle tabelle */
+table button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #0062cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+.table-container {
+  max-height: 200px; /* Regola l'altezza massima come necessario */
+  overflow-y: auto;
+  width: fit-content;
+}
+
+table button:hover {
+  background-color: #004080;
+}
+
+/* Stile per le righe finali delle tabelle */
+table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Stile per l'immagine all'interno della tabella */
+table img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.order-actions {
+  display: flex;
+  gap: 1px;
+  justify-content: flex-start;
+}
+
+/* Submit Button Styles */
+button {
+  display: inline-block;
+  font-weight: 400;
+  color: #6c757d;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #6c757d;
+  padding: 0.50rem  1.25rem; /* Increased padding */
+  font-size: 1.00rem; /* Increased font size */
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+button:hover {
+  color: #fff;
+  background-color: #0062cc;
+  border-color: #6c757d;
+}
+
+button:focus, button:active {
+  outline: none;
+  box-shadow: none;
+}

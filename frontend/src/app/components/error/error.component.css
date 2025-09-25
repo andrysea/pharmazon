@@ -1,0 +1,17 @@
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .error-message {
+    white-space: pre-line;
+    font-size: 1.2em; /* Dimensione del testo */
+    line-height: 1.5; /* Spaziatura tra le righe */
+    color: #ff0000; /* Colore del testo */
+  }
+  

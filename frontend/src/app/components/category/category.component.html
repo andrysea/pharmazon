@@ -1,0 +1,55 @@
+<app-header></app-header>
+
+<body style="overflow-x: hidden;">
+  <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+    <p style="font-size: 20px; margin: 0;">
+      <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+      <b>{{ message }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+</div>
+
+<div style="position: relative; top: 50px; left: 250px; width: fit-content">
+  <h2>Inserisci Categoria</h2>
+  <div class="category-container">
+    <table class="new-category-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" placeholder="es: Antinfiammatorio" [(ngModel)]="name"></td>
+          <td><button (click)="insertCategory(name)">Inserimento</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="category$.length > 0" style="position: relative; top: -120px; right: -650px; width: fit-content;">
+    <h2>Modifica Categoria</h2> 
+        <div class="category-container">
+            <table class="new-category-table">
+                <thead>
+                    <tr>
+                    <th>Nome</th>
+                    <th>Azioni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let category of category$">
+                      <td><input type="text" [(ngModel)]="category.name " /></td>
+                      <td>
+                          <button (click)="modifyCategory(category)">Modifica</button>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+  </div>
+
+</body>
+

@@ -1,0 +1,22 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benvenuto in Pharmazon</title>
+  </head>
+<app-header></app-header>
+
+<div class="welcome-container" style="text-align:center; position: relative; top: 140px; left: 420px">
+    <h2 >Benvenuto in Pharmazon!</h2>
+
+    <div *ngIf="!auth.isLoggedAdmin()">
+        <h3><b>La tua farmacia, apportata di un click!</b></h3>
+        <img src="assets/images/logo_scritta.png" alt="Pharmazon" style="position: relative; bottom: 80px; left:150px">
+    </div>
+
+    <div *ngIf="auth.isLoggedAdmin()">
+        <h3><b>Pronto a gestire la tua farmacia?</b></h3>
+        <img src="assets/images/logo_scritta.png" alt="Pharmazon" style="position: relative; bottom: 60px; left:150px">
+    </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,20 @@
+img {
+    display: inline-block;
+  }
+  
+  .dduser {
+    margin-right: 0px;
+    margin-left: 20px;
+  }
+  
+  nav {
+    margin-bottom: 0.8%;
+  }
+  .mat-icon {
+    vertical-align: middle;
+}
+.dropdown-menu {
+  right: 0;
+  left: auto;
+  min-width: 150px;
+}

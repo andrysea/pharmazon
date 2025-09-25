@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+  <p style="font-size: 20px; margin: 0;">
+    <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+    <b>{{ message }}</b>
+    <button class="close-button" (click)="closePopup()">×</button>
+  </p>
+</div>
+<div *ngIf="feedback$.length !== 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Username Cliente</th>
+          <th>Codice Prodotto</th>
+          <th>Nome Prodotto</th>
+          <th>Quantità</th>
+          <th>Descrizione</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of feedback$; let i = index">
+          <td>{{ feedback.clientDto.username }}</td>
+          <td>{{ feedback.cartItemDto.code }}</td>
+          <td>{{ feedback.cartItemDto.name }}</td>
+          <td>{{ feedback.cartItemDto.quantity }}</td>
+          <td>{{ feedback.description }}</td>
+          <td>
+            <button (click)="deleteFeedback(feedback.code)">Elimina</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div> 
+

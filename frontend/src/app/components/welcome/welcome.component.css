@@ -1,0 +1,13 @@
+body{
+    background-color: aqua;
+    background-size: cover;
+}
+
+.welcome-container {
+    background-color: #f0f0f0;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    width: 500px;
+    height: 200px;
+}

@@ -1,0 +1,136 @@
+<app-header></app-header>
+
+<!-- Ordini in attesa di controllo -->
+<div *ngIf="orders$.length !== 0" class="waiting-order">
+  <div class="popup" *ngIf="message !== ''">
+    <p>
+      <mat-icon color="warn">warning</mat-icon>
+      <b [innerHTML]="message"></b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+  </div>
+
+  <h3>ORDINI IN ATTESA DI CONTROLLO</h3>
+  <form>
+    <label for="userSelect">Seleziona ordine:</label>
+    <select (change)="orderSelectedOption($event)">
+      <option value="NoOrderChoose" disabled selected>Codice ordine</option>
+      <option *ngFor="let order of orders$" [value]="order.code"> 
+            {{ order.code }}
+      </option>
+    </select>
+  </form>
+
+  <div class="table-container" *ngIf="enabled">
+    <table>
+      <thead>
+        <tr>
+          <th>Codice prodotto</th>
+          <th>Nome</th>
+          <th>Quantità</th>
+          <th>Immagine Prescrizione</th>
+          <th>Selezione</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cartItemDto of orderSelected?.cartDto?.cartItemsDto">
+          <ng-container *ngIf="cartItemDto.productDto.prescription">
+            <td>{{ cartItemDto.productDto.code }}</td>
+            <td>{{ cartItemDto.productDto.name }}</td>
+            <td>{{ cartItemDto.quantity }}</td>
+            <td><a [href]="getImage(cartItemDto.imagePrescription)" download> <mat-icon>download</mat-icon> <img [src]="getImage(cartItemDto.imagePrescription)" class="img-rounded" width="180" height="225" alt="Product"> </a></td>
+            <td>
+              <input type="radio" name="radioGroup{{ cartItemDto.productDto.code }}" [(ngModel)]="selectedOptions[cartItemDto.productDto.code]" value="true"> Accetto <br>
+              <input type="radio" name="radioGroup{{ cartItemDto.productDto.code }}" [(ngModel)]="selectedOptions[cartItemDto.productDto.code]" value="false"> Rifiuto
+            </td>
+          </ng-container>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="confirmSelection()">Conferma Selezione</button>
+  </div>
+</div>
+
+<div *ngIf="orders$.length === 0 && dataLoaded">
+  <div class="popup" *ngIf="message !== ''">
+    <p>
+      <mat-icon color="warn">warning</mat-icon>
+      <b>{{ message }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+  </div>
+</div>
+
+<!-- Ordini in attesa di aggiornamento -->
+<div *ngIf="ordersOtherStates$.length !== 0 && states$.length !== 0" class="update-order">
+  <h3>ORDINI IN ATTESA DI AGGIORNAMENTO</h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Codice Ordine</th>
+          <th>Prezzo</th>
+          <th>Stato</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of ordersOtherStates$; let i = index">
+          <td>{{ order.code }}</td>
+          <td>{{ order.total }}€</td>
+          <td>{{ order.stateDto.state }}</td>
+          <td class="order-actions">
+            <button (click)="updateOrder(order, false, '')">Stato precedente</button>
+            <button (click)="updateOrder(order, true, '')">Stato successivo</button>
+            <button (click)="updateOrder(order, false, 'ELIMINATO')">Elimina ordine</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="ordersOtherStates$.length === 0 && dataLoaded">
+  <div class="popup" *ngIf="message !== ''">
+    <p>
+      <mat-icon color="warn">warning</mat-icon>
+      <b>{{ message }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+  </div>
+</div>
+
+<!-- Storico ordini -->
+<div *ngIf="ordersHistory$.length !== 0 && states$.length !== 0" class="history-order">
+  <h3>STORICO ORDINI</h3>
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Codice Ordine</th>
+          <th>Totale</th>
+          <th>Stato</th>
+          <th>Indirizzo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of ordersHistory$; let i = index">
+          <td>{{ order.code }}</td>
+          <td>{{ order.total }}€</td>
+          <td>{{ order.stateDto.state }}</td>
+          <td>{{ order.addressDto.address}}, <br>{{order.addressDto.city}} ({{order.addressDto.province}}), {{order.addressDto.cap}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="ordersHistory$.length === 0 && dataLoaded">
+  <div class="popup" *ngIf="message !== ''">
+    <p>
+      <mat-icon color="warn">warning</mat-icon>
+      <b>{{ message.split('.') }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+  </div>
+</div>

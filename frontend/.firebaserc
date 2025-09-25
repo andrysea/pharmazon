@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "pharmazon-32228": {
+      "hosting": {
+        "pharmazonUI": [
+          "pharmazon-32228"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "pharmazon-32228"
+  }
+}

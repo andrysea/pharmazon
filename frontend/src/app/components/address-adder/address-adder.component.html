@@ -1,0 +1,42 @@
+
+<div class="col-md-6 external-form">
+    <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+        <p style="font-size: 20px; margin: 0;">
+          <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+          <b>{{ message }}</b>
+          <button class="close-button" (click)="closePopup()">×</button>
+        </p>
+    </div>
+
+    <h3><b>Inserisci indirizzo</b></h3>
+    <div class="form-group">
+        <b>Nome destinatario:</b><input type="text" class="form-control"  placeholder="es: Mario" [(ngModel)] = "name">
+    </div>
+    <div class="form-group">
+        <b>Cognome destinatario:</b><input type="text" class="form-control"  placeholder="es: Rossi" [(ngModel)] = "surname" >
+    </div>
+    <div class="form-group">
+        <b>Numero di telefono:</b><input type="text" class="form-control"  placeholder="+39" [(ngModel)] = "number" >
+    </div>
+    <div class="form-group">
+        <b>Indirizzo:</b><input type="text" class="form-control" placeholder="es: Via Piazza XX Settembre" [(ngModel)] = "address" >
+    </div>
+    <div class="form-group">
+        <b>CAP:</b><input type="text" class="form-control"  placeholder="es: 74015" [(ngModel)] = "cap" >
+    </div>
+    <div class="form-group">
+        <b>Città:</b><input type="text" class="form-control"  placeholder="es: Martina Franca" [(ngModel)] = "city">
+    </div>
+    <div class="form-group">
+        <b>Provincia:</b><input type="text" class="form-control"  placeholder="es: Taranto" [(ngModel)] = "province">
+    </div>
+    <div class="form-group">
+        <button type="button" (click) = addAddress() class="btnSubmit">Aggiungi</button>
+    </div>
+    <div class ="content-header">
+        <div>
+            <button (click)="reloadCurrentPage()" class="btn btn-primary">Ritorna indietro</button>
+        </div>
+    </div>
+</div>
+

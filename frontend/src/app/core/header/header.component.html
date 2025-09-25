@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/welcome">
+        <img src="/assets/images/logo.png" width="30" height="30" alt="">
+    </a>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" title="Catalogo" routerLink="/catalog">
+            Catalogo
+            <mat-icon>menu_book</mat-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" title="Servizi" routerLink="/service">
+            Servizi
+            <mat-icon>medical_services</mat-icon>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" title="Calendario" routerLink="/calendar" *ngIf="auth.isLoggedAdmin()">
+            Calendario
+            <mat-icon>date_range</mat-icon>
+          </a>
+        </li>
+        <li>
+          <a class="nav-link" title="Ordine" routerLink="/orderUser" *ngIf="!auth.isLoggedAdmin()">
+            Ordini
+            <mat-icon>local_shipping</mat-icon>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" title="Carrello" routerLink="/cart" *ngIf="!auth.isLoggedAdmin()">
+          Carrello
+          <mat-icon>shopping_cart</mat-icon>
+        </a>
+        <a class="nav-link" title="Ordine" routerLink="/order" *ngIf="auth.isLoggedAdmin()">
+          Ordini
+          <mat-icon>local_shipping</mat-icon>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" title="Chat" routerLink="/chat">
+          Chat
+          <mat-icon>chat</mat-icon>
+        </a>
+      </li>
+      <li>
+        <a class="nav-link" title="Feedback" routerLink="/feedback" *ngIf="!auth.isLoggedAdmin()">
+          Feedback
+          <mat-icon>star</mat-icon>
+        </a>
+        <a class="nav-link" title="Feedback" routerLink="/feedbackAdmin" *ngIf="auth.isLoggedAdmin()">
+          Feedback
+          <mat-icon>star</mat-icon>
+        </a>
+      </li>
+    </ul>
+
+    <div class="btn-group">
+      <button type="button" class="btn btn-default dropdown-toggle thumbnail dduser" data-toggle="dropdown" aria-expanded="false" id="dropdownMenu">
+        <img class="img-circle" src="/assets/images/user.png" width="38" height="38">
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+        <li><a class="dropdown-item" routerLink="/personal">Personale</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item"  *ngIf="auth.isLogged()" routerLink="/logout">Logout {{auth.loggedUser()}}</a></li>
+      </ul>
+    </div> 
+  </div>
+</nav>

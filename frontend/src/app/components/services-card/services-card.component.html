@@ -1,0 +1,24 @@
+
+<div class="col">
+    <div class="card card-product-grid">
+      <a href="javascript:void(0)" (click)="showService()" class="img-wrap"> <img [src]="getImage()" class="img-rounded"  width="180" height="225" alt="Product"> </a>
+      <div class="info-wrap">
+        <a href="javascript:void(0)" (click)="showService()" class="title text-truncate">{{service.name}}</a>
+        <div class="price mb-2">{{service.price | currency:'EUR'}}</div>
+        <div class="price mb-2">Posti liberi: {{service.availability}}</div>
+        <div class="price mb-2">Data e ora inizio: <br>{{service.dateChosen | date: 'dd-MM-yyyy HH:mm'}}</div>
+        <button href="#" class="btn btn-sm btn-outline-dark" (click)="editArt()"  *ngIf="auth.isLoggedAdmin()">
+          Modifica
+        </button>
+        <button href="#" class="btn btn-sm btn-outline-danger" (click)="deleteService()"  *ngIf="auth.isLoggedAdmin()">
+          Rimuovi
+        </button>
+        <button href="#" class="btn btn-sm btn-outline-danger" (click)="addBook()"  *ngIf="!auth.isLoggedAdmin()">
+          Prenotati
+        </button>
+        <button href="#" class="btn btn-sm btn-outline-danger" (click)="deleteBook()"  *ngIf="!auth.isLoggedAdmin()">
+          Rimuovi
+        </button>
+      </div>
+    </div>
+  </div>

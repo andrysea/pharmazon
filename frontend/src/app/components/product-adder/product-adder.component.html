@@ -1,0 +1,59 @@
+<div class="col-md-6 external-form">
+    <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+        <p style="font-size: 20px; margin: 0;">
+          <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+          <b>{{ message }}</b>
+          <button class="close-button" (click)="closePopup()">×</button>
+        </p>
+    </div>
+    
+    <h3><b>Crea prodotto</b></h3>
+    <div class="form-group">
+        <b>Codice Prodotto:</b><input type="text" class="form-control"  id="code" placeholder="es: 123" [(ngModel)] = "code">
+    </div>
+    <div class="form-group">
+        <b>Nome Prodotto:</b><input type="text" class="form-control"  id="name" placeholder="es: Paracetamolo Plus" [(ngModel)] = "name" >
+    </div>
+    <div class="form-group">
+        <b>Principio Attivo:</b><input type="text" class="form-control"  id="activeIngredient" placeholder="es: Paracetamolo" [(ngModel)] = "activeIngredient" >
+    </div>
+    <div class="form-group">
+        <b>Descrizione:</b><input type="text" class="form-control"  id="description" placeholder="Prodotto utile per..." [(ngModel)] = "description" >
+    </div>
+    <div class="form-group">
+        <b>Produttore:</b><input type="text" class="form-control"  id="producer" placeholder="es: PharmaXYZ" [(ngModel)] = "producer" >
+    </div>
+    <div class="form-group">
+        <b>Prezzo:</b><input type="number" onkeydown="return event.keyCode !== 69" class="form-control"  id="price" [(ngModel)] = "price" min="1">
+    </div>
+    <div class="form-group">
+        <b>Quantità disponibile:</b><input type="number" onkeydown="return event.keyCode !== 69" class="form-control"  id="quantity" [(ngModel)] = "quantity" min="1">
+    </div>
+    <div class="category">
+        <b>Categoria:</b>
+        <select class="form-select" [(ngModel)]="category">
+            <option value="0" disabled selected>Seleziona categoria</option>  
+            <option *ngFor="let category of category$" [value]="category.name">{{category.name}}</option>
+        </select>
+      </div>
+    <div class="form-group">
+        <b>Immagine prodotto:</b><br>
+        <input type="file" id="image" accept=".png,.jpg,.jpeg" (change)="onFileChanged($event)">
+    </div>
+    <div class="form-group">
+        <b>C'è bisogno di una prescrizione? </b>
+            <input type="radio" id="prescriptionTrue" placeholder="Prescrizione" [(ngModel)] = "prescription" value="true">Si
+        <span class="space"></span>
+            <input type="radio" id="prescriptionFalse" placeholder="Prescrizione" [(ngModel)] = "prescription" value="false">No
+        <b><br>(Se non inserito, di default il valore sarà: No)</b>
+    </div>
+    <div class="form-group">
+        <button type="button" (click) = createProduct() class="btnSubmit">Crea</button>
+    </div>
+    <div class ="content-header">
+        <div>
+            <button (click)="reloadCurrentPage()" class="btn btn-primary">Ritorna indietro</button>
+        </div>
+    </div>
+</div>
+

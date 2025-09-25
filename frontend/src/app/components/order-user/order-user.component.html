@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="popup" *ngIf="message !== ''">
+  <p>
+    <mat-icon color="warn">warning</mat-icon>
+    <b>{{ message }}</b>
+    <button class="close-button" (click)="closePopup()">×</button>
+  </p>
+</div>
+
+<div *ngIf="orders$.length !== 0" class="table-container">
+    <h4>LISTA ORDINI  <mat-icon style="vertical-align: middle;">local_shipping</mat-icon></h4>
+    <table>
+      <thead>
+        <tr>
+          <th>Codice Ordine</th>
+          <th>Totale</th>
+          <th>Indirizzo</th>
+          <th>Stato</th>
+          <th>Dettagli</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders$; let i = index">
+          <td>{{ order.code }}</td>
+          <td>{{ order.total }}€</td>
+          <td>{{ order.addressDto.address}}, <br>{{order.addressDto.city}} ({{order.addressDto.province}}), {{order.addressDto.cap}} </td>
+          <td><b>{{ order.stateDto.state }}</b></td>
+            <div *ngFor="let cartItem of order.cartDto.cartItemsDto">
+              <td>
+                <p><strong>CODICE PRODOTTO:</strong> {{ cartItem.code | uppercase }}</p>
+                <p><strong>NOME PRODOTTO:</strong> {{ cartItem.name | uppercase }}</p>
+                <p><strong>PRODUTTORE:</strong> {{ cartItem.productDto.producer | uppercase }}</p>
+                <p><strong>PREZZO:</strong> {{ cartItem.price }}€</p>
+                <p><strong>QUANTITA':</strong> {{ cartItem.quantity }}</p>
+              </td>
+            </div>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+<div *ngIf="((!orders$ || orders$.length === 0) && dataLoaded)">
+  <div class="popup" *ngIf="message !== ''">
+    <p>
+      <mat-icon color="warn">warning</mat-icon>
+      <b>{{ message }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+  </div>
+</div>

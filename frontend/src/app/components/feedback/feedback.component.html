@@ -1,0 +1,66 @@
+<app-header></app-header>
+<div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+  <p style="font-size: 20px; margin: 0;">
+    <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+    <b>{{ message }}</b>
+    <button class="close-button" (click)="closePopup()">×</button>
+  </p>
+</div>
+
+<div *ngIf="cartItem$.length !== 0">
+  <h3 class = "content-title">INSERISCI I TUOI FEEDBACK</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Codice Prodotto</th>
+          <th>Nome Prodotto</th>
+          <th>Prezzo</th>
+          <th>Descrizione</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cartItem of cartItem$">
+          <td>{{ cartItem.code }}</td>
+          <td>{{ cartItem.name }}</td>
+          <td>{{ cartItem.price }}</td>
+          <td><input type="text" [(ngModel)]="descriptions[cartItem.code]" /></td>
+          <td>
+            <button (click)="sendFeedback(cartItem.code, cartItem.name, descriptions[cartItem.code])">
+              Inserisci
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+
+
+<div *ngIf="feedback$.length !== 0">
+  <h3 class = "content-title">GESTISCI I TUOI FEEDBACK</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Codice Prodotto</th>
+          <th>Nome</th>
+          <th>Descrizione</th>
+          <th>Modifica Feedback</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let feedback of feedback$">
+          <td>{{ feedback.cartItemDto.code }}</td>
+          <td>{{ feedback.cartItemDto.name }}</td>
+          <td class="description-cell">{{ feedback.description }}</td>
+          <td>
+            <input type="text" [(ngModel)]="descriptions[feedback.code]">
+          </td>
+          <td>
+            <button (click)="updateFeedback(feedback.code, descriptions[feedback.code])">Modifica</button>
+            <button (click)="deleteFeedback(feedback.code)">Elimina</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+</div>  
+

@@ -1,0 +1,104 @@
+<app-header></app-header>
+<body style="overflow-x: hidden; overflow-y: hidden;">
+  <div class="container" style="position: relative; top: -5px; left:-15px">
+    <h2>Dati Utente</h2>
+      <table class="user-details">
+        <tr>
+          <td><strong>Nome:</strong></td>
+          <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+          <td><strong>Cognome:</strong></td>
+          <td>{{ user.surname }}</td>
+        </tr>
+        <tr>
+          <td><strong>Username:</strong></td>
+          <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+          <td><strong>Email:</strong></td>
+          <td>{{ user.number }}</td>
+        </tr>
+        <tr>
+          <td><strong>Tax ID:</strong></td>
+          <td>{{ user.taxId }}</td>
+        </tr>
+        <tr>
+          <td><strong>Data di Nascita:</strong></td>
+          <td>{{ user.birthDate | date: 'dd/MM/yyyy' }}</td>
+        </tr>
+      </table>
+  
+      <button type="button" (click)="modifyUserInformation()">Modifica</button>
+      <button *ngIf="!auth.isLoggedAdmin()" type="button" (click)="deleteUser(this.username)">Elimina</button>
+  </div>
+  
+  <div *ngIf="auth.isLoggedAdmin()" style="position: relative; bottom: 330px; left: 450px; width: fit-content; height: fit-content;">
+    <div *ngIf="user$ && user$.length > 0" class="rectangle-container">
+      <h2>Dati Utenti</h2>
+      <div *ngFor="let user of user$" class="square">
+        <div class="card-info">
+          <p><b>Nome:</b> {{ user.name }}</p>
+          <p><b>Cognome:</b> {{ user.surname }}</p>
+          <p><b>Username: </b> {{ user.username }}</p>
+          <p><b>Numero:</b> {{ user.number}} </p>
+          <p><b>Email:</b> {{ user.email}} </p>
+          <button type="button" (click)="deleteUser(user.username)" style="position: relative; left:10px">Elimina</button>
+      </div> 
+      </div>
+    </div>
+  </div>
+  
+  <div *ngIf="!auth.isLoggedAdmin()">
+    <div style="position: relative; top: 10px; left:15px">
+      <h2>Aggiungi Carta di Credito</h2>
+      <button type="button" (click)="addCreditCard()">Aggiungi</button>
+  
+      <h2>Aggiungi Indirizzo</h2>
+      <button type="button" (click)="addAddress()">Aggiungi</button>
+    </div>
+    
+    <div style="position: relative; bottom: 540px; left: 450px; width: fit-content; height: fit-content;">
+      <div *ngIf="creditCard$ && creditCard$.length > 0" class="rectangle-container">
+        <h2>Dati Carta di Credito</h2>
+        <div *ngFor="let card of creditCard$" class="square">
+          <div class="card-info">
+            <p><b>Nome:</b> {{ card.name }}</p>
+            <p><b>Cognome:</b> {{ card.surname }}</p>
+            <p><b>Data di scadenza:</b> {{ card.expirationDate }}</p>
+            <p><b>Numero:</b> {{ card.number.substring(0,4)}} ••••</p>
+            <button type="button" (click)="modifyCreditCard(card)" style="position: relative; left:10px">Modifica</button>
+            <button type="button" (click)="deactivateCreditCard(card.number)" style="position: relative; left:10px">Elimina</button>
+          </div> 
+        </div>
+      </div>
+  
+      <div *ngIf="address$ && address$.length > 0" class="rectangle-container">
+        <h2>Dati Indirizzo</h2>
+        <div *ngFor="let address of address$" class="square" style="height: 280px">
+          <div class="card-info">
+            <p><b>Nome:</b> {{ address.name }} - <b>Cognome:</b> {{ address.surname }}</p>
+            <p><b>Numero di recapito:</b> {{ address.number }}</p>
+            <p><b>Indirizzo:</b> {{ address.address }}</p>
+            <p><b>Città:</b> {{ address.city }}<b> - Provincia:</b> {{ address.province }}</p>
+            <p><b>CAP:</b> {{ address.cap }}</p>
+            <button type="button" (click)="modifyAddress(address)" style="position: relative; left:10px">Modifica</button>
+            <button type="button" (click)="deactivateAddress(address)" style="position: relative; left:10px">Elimina</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+    <p style="font-size: 20px; margin: 0;">
+      <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+      <b>{{ message }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+  </div>
+</body>

@@ -1,0 +1,51 @@
+<app-header></app-header>
+
+<div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+  <p style="font-size: 20px; margin: 0;">
+    <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+    <b>{{ message }}</b>
+    <button class="close-button" (click)="closePopup()">×</button>
+  </p>
+</div>
+
+<div class="booking-item-container">
+  <ng-container *ngFor="let booking of bookingsNotAccepted$">
+      <div class="booking-item">
+        <div class="booking-details">
+          <h5 class = "content-title">Appuntamento da accettare o rifiutare</h5>
+          <strong>Nome Servizio:</strong> {{ booking.service.name }}<br>
+          <strong>Data Prenotazione:</strong> {{ booking.service.dateChosen | date:'dd/MM/yyyy' }}<br>
+          <strong>Orario Prenotazione:</strong> {{ booking.service.dateChosen | date:'HH:mm' }}<br>
+        </div>
+        <div class="booking-actions">
+          <button (click)="acceptOrRejectBooking(booking, true)">Accetta</button>
+          <button (click)="acceptOrRejectBooking(booking, false)">Rifiuta</button>
+        </div>
+      </div>
+  </ng-container>
+
+  <div class="booking-item" *ngIf="bookingsNotAccepted$.length==0">
+    <div class="booking-details">
+      <h5 class = "content-title">Nessun appuntamento da accettare o rifiutare.</h5>
+    </div>
+  </div>
+</div>
+
+<div class="booking-item-container" style="top:75px; position:relative">
+  <ng-container *ngFor="let booking of bookingsAccepted$">
+    <div class="booking-item">
+      <div class="booking-details">
+        <h5 class = "content-title">Appuntamento accettato</h5>
+        <strong>Nome Servizio:</strong> {{ booking.service.name }}<br>
+        <strong>Data Prenotazione:</strong> {{ booking.service.dateChosen | date:'dd/MM/yyyy' }}<br>
+        <strong>Orario Prenotazione:</strong> {{ booking.service.dateChosen | date:'HH:mm' }}<br>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="booking-item" *ngIf="bookingsAccepted$.length==0">
+    <div class="booking-details">
+      <h5 class = "content-title">Nessun appuntamento accettato.</h5>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,216 @@
+/* styles.css */
+
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+p {
+  color: black;
+  font-weight: bold;
+}
+
+p.centered {
+  text-align: center;
+}
+
+/* Header Styles */
+app-header {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* Cart Information Styles */
+h2 {
+  margin-top: 20px;
+  color: #333;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #0062cc;
+  color: white;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+tbody td {
+  vertical-align: top;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0;
+}
+
+/* Credit Card and Address Information Styles */
+.rectangle-container {
+  display: flex;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  white-space: nowrap;
+  width: 400px;
+  height: 200px;
+  list-style-type: none;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.square {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 300px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  display: inline-block;
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background-color: #d7d6d6;
+}
+
+.card-info {
+  margin-top: 8px;
+}
+
+.no-cards {
+  margin-top: 20px;
+  text-align: center;
+  color: #999;
+}
+
+input[type="radio"] {
+  margin-top: 10px;
+}
+
+/* Submit Button Styles */
+button.btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #6c757d;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #6c757d;
+  padding: 0.75rem  1.75rem; /* Increased padding */
+  font-size: 1.00rem; /* Increased font size */
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+button.btn:hover {
+  color: #fff;
+  background-color: #0062cc;
+  border-color: #6c757d;
+}
+
+button.btn:focus, button.btn:active {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .rectangle-container {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+
+  .square {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+.popup {
+  position: fixed;
+  top: 120px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  width: fit-content;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.popup p {
+  font-size: 20px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.popup mat-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+  color: #f44336; /* warn color */
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  color: #888;
+  align-self: flex-start;
+}
+
+.close-button:hover {
+  color: #555;
+}
+
+.choice-heading {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333; /* Colore del testo */
+  background-color: #f5f5f5; /* Colore dello sfondo */
+  padding: 8px 12px; /* Spaziatura interna */
+  border-radius: 5px; /* Angoli arrotondati */
+  margin-bottom: 10px; /* Spazio inferiore */
+  display: inline-block; /* Per adattarsi al contenuto */
+}
+
+.confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra orizzontalmente all'interno del contenitore */
+  margin-top: 20px; /* Aggiungi spazio superiore */
+}

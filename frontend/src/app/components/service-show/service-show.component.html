@@ -1,0 +1,29 @@
+<div class="col-md-6 external-form">
+    <h3><b>Visualizzazione servizio</b></h3>
+    <div class="form-group">
+        <b>Codice:</b><input type="text" class="form-control"  id="code" placeholder="Codice Servizio" [(ngModel)] = "service.code" disabled>
+    </div>
+    <div class="form-group">
+        <b>Nome:</b><input type="text" class="form-control"  id="name" placeholder="Nome Servizio" [(ngModel)] = "service.name" disabled>
+    </div>
+    <div class="form-group">
+        <b>Descrizione:</b><input type="text" class="form-control"  id="description" placeholder="Descrizione" [(ngModel)] = "service.description" disabled>
+    </div>
+    <div class="form-group">
+        <b>Prezzo:</b><input type="number" onkeydown="return event.keyCode !== 69" class="form-control"  id="price" placeholder="Prezzo" [(ngModel)] = "service.price" disabled>
+    </div>
+    <div class="form-group">
+        <b>Posti disponibili:</b><input type="number" class="form-control"  id="availability" placeholder="Disponibilità" [(ngModel)] = "service.availability" step="0" disabled>
+    </div>
+    <div class="form-group">
+        <b>Data - Ora:</b><input type="datetime-local" class="form-control"  id="dateChosen" [(ngModel)] = "service.dateChosen" disabled>
+    </div>
+    <div>
+        <img [src]="getImage(service.image)" class="img-rounded"  width="180" height="225" alt="Product" >
+    </div>
+    <div class ="content-header">
+        <div>
+            <a href="/service" class="btn btn-primary">Ritorna indietro</a>
+        </div>
+    </div>
+</div>

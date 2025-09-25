@@ -1,0 +1,35 @@
+
+<div class="col">
+    <div class="card card-product-grid">
+      <a href="javascript:void(0)" (click)="showProduct()" class="img-wrap"> <img [src]="getImage()" class="img-rounded"  width="180" height="225" alt="Product"> </a>
+      <div class="info-wrap">
+        <div *ngIf="product.prescription" class="container">
+          <mat-icon style="color: red;">local_hospital</mat-icon>
+          Prescrizione
+        </div>
+        <div *ngIf="!product.prescription" class="container">
+          <mat-icon style="color: green;">local_hospital</mat-icon>
+          No Prescrizione
+        </div>
+        <a href="javascript:void(0)" (click)="showProduct()" class="title text-truncate">{{product.name}}</a>
+        <div class="price mb-2">{{product.price | currency:'EUR'}}</div>
+        <div class="price mb-2">Quantità: {{product.quantity}}</div>
+        <button class="btn btn-sm btn-outline-success" (click)="editProduct()"  *ngIf="auth.isLoggedAdmin()">
+            <i class="material-icons md-edit"></i>Modifica
+        </button>
+        <button class="btn btn-sm btn-outline-danger" (click)="activateProduct()"  *ngIf="auth.isLoggedAdmin() && product.activeProduct">
+          Rimuovi
+        </button>
+        <button class="btn btn-sm btn-outline-danger" (click)="activateProduct()"  *ngIf="auth.isLoggedAdmin() && !product.activeProduct">
+          Aggiungi
+        </button>
+        <button class="btn btn-sm btn-outline-success" (click)="addCart()"  *ngIf="!auth.isLoggedAdmin()">
+          <mat-icon>card_travel</mat-icon>
+        </button>
+        <button class="btn btn-sm btn-outline-danger" (click)="removeFromCart()"  *ngIf="!auth.isLoggedAdmin()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  

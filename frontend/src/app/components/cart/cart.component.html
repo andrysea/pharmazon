@@ -1,0 +1,116 @@
+<app-header></app-header>
+
+<div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+    <p style="font-size: 20px; margin: 0;">
+      <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+      <b>{{ message }}</b>
+      <button class="close-button" (click)="closePopup()">×</button>
+    </p>
+</div>
+
+<!-- PRODUCTS' CART INFORMATION-->
+<div *ngIf="(cartItems$ && cartItems$.length > 0)" style="height: 100px; width: 100%;">
+    <h2>
+        Carrello
+        <mat-icon>shopping_cart</mat-icon>
+    </h2>
+
+    <table border="1" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Produttore</th>
+                <th>Prezzo</th>
+                <th>Quantità</th>
+                <th>Immagine della prescrizione</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cartItem of cartItems$">
+                <td>{{ cartItem.productDto.name }}</td>
+                <td>{{ cartItem.productDto.producer }}</td>
+                <td>{{ cartItem.productDto.price }}</td>
+                <td *ngIf="cartItem.quantity > 0">{{ cartItem.quantity }}</td>
+                <td *ngIf="cartItem.quantity === 0"><b>Non disponibile</b></td>
+                <td *ngIf="cartItem.productDto.prescription">
+                    <input type="file" (change)="onFileChanged($event, cartItem)" id="imagePrescription" accept=".png,.jpg,.jpeg">
+                </td>
+                <td *ngIf="!cartItem.productDto.prescription">
+                    <p>Non richiesta.</p>
+                </td>
+                <td>
+                    <button (click)="removeFromCart(cartItem.productDto.code)" class="btn btn-outline-secondary">Rimuovi</button>
+                </td>
+            </tr>
+            <tr>
+                <td><b>Costo totale: {{this.total}}€</b></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- CREDIT CARD INFORMATION-->
+    <div *ngIf="creditCard$ && creditCard$.length > 0" class="rectangle-container">
+        <b class="choice-heading">Scegli la tua carta di credito:</b>
+        <div *ngFor="let card of creditCard$" class="square">
+            <div class="card-info">
+                <p><b>Nome:</b> {{ card.name }}</p>
+                <p><b>Cognome:</b> {{ card.surname }}</p>
+                <p><b>Data di scadenza:</b> {{ card.expirationDate }}</p>
+                <p><b>Numero:</b> {{ card.number.substring(0,4)}} ••••</p>
+            </div>
+            <input type="radio" name="creditCard" [(ngModel)]="selectedCard" [value]="card">
+        </div>
+    </div>
+
+    <div *ngIf="(!creditCard$ || creditCard$.length === 0)">
+        <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+            <p style="font-size: 20px; margin: 0;">
+              <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+              <b>{{message}}</b>
+              <button class="close-button" (click)="closePopup()">×</button>
+            </p>
+        </div>
+    </div>
+
+    <!-- ADDRESS INFORMATION-->
+    <div *ngIf="address$ && address$.length > 0 && creditCard$ && creditCard$.length > 0" class="rectangle-container" style="position: relative; left:500px; bottom:220px">
+        <b class="choice-heading">Scegli il tuo indirizzo:</b>
+        <div *ngFor="let address of address$" class="square">
+            <div class="card-info">
+                <p><b>Nome:</b> {{ address.name }} - <b>Cognome:</b> {{ address.surname }}</p>
+                <p><b>Numero di recapito:</b> {{ address.number }}</p>
+                <p><b>Indirizzo:</b> {{ address.address }}</p>
+                <p><b>Città:</b> {{ address.city }}<b> - Provincia:</b> {{ address.province }}</p>
+                <p><b>CAP:</b> {{ address.cap }}</p>
+            </div>
+            <input type="radio" name="address" [(ngModel)]="selectedAddress" [value]="address">
+        </div>
+    </div>
+    <div *ngIf="(!address$ || address$.length === 0)">
+        <div class="popup" *ngIf="message !== ''" style="padding: 10px; width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+            <p style="font-size: 20px; margin: 0;">
+              <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+              <b>{{message}}</b>
+              <button class="close-button" (click)="closePopup()">×</button>
+            </p>
+        </div>
+    </div>
+
+    <div class= "confirmation-container" style="position:relative; bottom:190px; left: 1080px; bottom: 350px; width: fit-content;" *ngIf="address$ && address$.length > 0 && creditCard$ && creditCard$.length > 0">
+    <p class="choice-heading" style="position: relative; bottom: 70px; right: 150px; font-size: 1.1rem;">Pronto per l'acquisto?</p>
+        <button (click)="submit()" class="btn btn-outline-secondary" style="position: relative; bottom: 70px; right: 150px">Conferma</button>
+    </div>
+</div>
+
+<div *ngIf="((!cartItems$ || cartItems$.length === 0) && dataLoaded)">
+    <div class="popup" *ngIf="message !== ''" style=" width: fit-content; background-color: #f5f5f5; border: 1px solid #ddd; border-radius: 10px;">
+        <p style="font-size: 20px; margin: 0;">
+          <mat-icon style="vertical-align: middle; margin-right: 8px;" color="warn">warning</mat-icon>
+          <b>{{message}}</b>
+          <button class="close-button" (click)="closePopup()">×</button>
+        </p>
+    </div>
+</div>
+
+

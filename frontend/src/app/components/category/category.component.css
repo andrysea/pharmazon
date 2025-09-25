@@ -1,0 +1,105 @@
+.new-category-table {
+    max-height: 200px; /* Altezza massima della tabella */
+    overflow-y: auto; /* Abilita lo scrolling verticale */
+    width: fit-content
+  }
+  
+  .category-container {
+    max-height: 200px; /* Altezza massima della tabella */
+    width: 750px
+  }
+
+.new-category-table,
+.category-table {
+  display: inline-block;
+  vertical-align: top; /* Allinea le tabelle in alto */
+  border-collapse: collapse;
+  width: calc(50% - 10px); /* Larghezza delle tabelle meno lo spazio tra di esse */
+  margin-top: 20px;
+}
+
+.new-category-table th,
+.category-table th,
+.new-category-table td,
+.category-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.new-category-table th,
+.category-table th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.new-category-table input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.new-category-table button,
+.category-table button {
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: #0062cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+.new-category-table button:hover,
+.category-table button:hover {
+  background-color: #004080;
+}
+
+.category-table input[type="text"] {
+  width: calc(100% - 16px); /* Adjusted for padding */
+}
+
+.category-table tr:last-child td,
+.new-category-table tr:last-child td {
+  border-bottom: none;
+}
+
+.popup {
+    position: fixed;
+    top: 50px; /* Posizione rispetto al top della finestra */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px;
+    width: fit-content;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999; /* Valore dello z-index superiore per mettere il popup sopra tutto */
+  }
+  
+  .popup p {
+    font-size: 20px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .popup mat-icon {
+    vertical-align: middle;
+    margin-right: 8px;
+    color: #f44336; /* warn color */
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    color: #888;
+    align-self: flex-start;
+  }
+  
+  .close-button:hover {
+    color: #555;
+  }

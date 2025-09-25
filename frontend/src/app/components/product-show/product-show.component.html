@@ -1,0 +1,43 @@
+<div class="col-md-6 external-form">
+    <h3><b>Visualizzazione prodotto</b></h3>
+    <div class="form-group">
+        <b>Codice Prodotto:</b><input type="text" class="form-control"   [(ngModel)] = "product.code" disabled>
+    </div>
+    <div class="form-group">
+        <b>Nome Prodotto:</b><input type="text" class="form-control"   [(ngModel)] = "product.name" disabled>
+    </div>
+    <div class="form-group">
+        <b>Principio Attivo:</b><input type="text" class="form-control"   [(ngModel)] = "product.activeIngredient" disabled>
+    </div>
+    <div class="form-group">
+        <b>Descrizione:</b><input type="text" class="form-control"  [(ngModel)] = "product.description" disabled>
+    </div>
+    <div class="form-group">
+        <b>Produttore:</b><input type="text" class="form-control"   [(ngModel)] = "product.producer" disabled>
+    </div>
+    <div class="form-group">
+        <b>Categoria:</b><input type="text" class="form-control"  [(ngModel)] = "product.categoryDto.name" disabled>
+    </div>
+    <div class="form-group">
+        <b>Prezzo:</b><input type="text" class="form-control"  [(ngModel)] = "product.price" disabled>
+    </div>
+    <div class="form-group">
+        <b>Quantità prodotto:</b><input type="text" class="form-control"  [(ngModel)] = "product.quantity" disabled>
+    </div>
+    <div *ngIf="product.prescription" class="container">
+        <mat-icon style="color: red;">local_hospital</mat-icon>
+        <b>Prescrizione</b>
+    </div>
+    <div *ngIf="!product.prescription" class="container">
+        <mat-icon style="color: green;">local_hospital</mat-icon>
+        <b>No Prescrizione</b>
+    </div>
+    <div>
+        <img [src]="getImage(product.image)" class="img-rounded"  width="180" height="225" alt="Product">
+    </div>
+    <div class ="content-header">
+        <div>
+            <a href="/catalog" class="btn btn-primary">Ritorna indietro</a>
+        </div>
+    </div>
+</div>
